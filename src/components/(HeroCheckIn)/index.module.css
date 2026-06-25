@@ -1,0 +1,62 @@
+.checkIn {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 5%;
+    width: 110rem;
+    height: 10rem;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(0.24rem);
+    border-radius: 0.8rem;
+}
+
+.checkinBlocks {
+    display: inline-flex;
+    gap: 6rem;
+}
+
+.block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.5rem;
+    width: 16rem;
+    background: #fff;
+    border-radius: 0.2rem;
+}
+
+input {
+    background: transparent;
+    border: none;
+    outline: none;
+
+}
+
+
+
+input[type=number] {
+    -moz-appearance: textfield;
+    margin-left: 2rem;
+}
+
+input[type=text] {
+    margin-left: 2rem;
+}
+
+.block:last-child {
+    background-color: #4A6B53;
+}
+
+.block p {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .checkIn {
+        display: none;
+    }
+}
