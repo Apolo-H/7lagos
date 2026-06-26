@@ -14,8 +14,6 @@ import imgMainPool from "../../../assets/Foto+Joao+Athaide+(182)-1920w.webp";
 import imgQuarto from "../../../assets/Foto+Joao+Athaide+(220)-8e7c62af-1920w.webp";
 import imgInfinityPool from "../../../assets/Foto+JoaÌ-o+AthaiÌ-de+(162)-1920w.webp";
 import userAvatar from "../../../assets/user.png";
-import slogan from "../../../assets/Slogan.webp";
-import logo from "../../../assets/logo.png";
 
 /* ─── dados ──────────────────────────────────────────────── */
 const ATIVIDADES = [
