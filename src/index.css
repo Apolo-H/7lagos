@@ -11,15 +11,16 @@
     list-style: none;
 }
 
-html {
+html, body {
     font-size: 62.5%;
-    overflow-x: none;
+    overflow-x: hidden;
     font-family: "Montserrat", sans-serif;
     scroll-behavior: smooth;
+    min-width: 300px;
 }
 
 img {
-    max-width: 100%; 
+    width: 100%; 
     height: auto;  
     display: block;  
 }

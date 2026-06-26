@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import style from "./index.module.css";
 import heroVideo from "../../../assets/SeteLagos/florest.mp4";
 import CheckIn from "../../(HeroCheckIn)/HeroCheckIn";
+import Header from "../../(Header)/Header"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
@@ -223,6 +224,7 @@ function Hero() {
 
   return (
     <>
+      <Header />
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className={style.hero} id="hero">
         <div className={style.heroOverlay} />
@@ -385,29 +387,10 @@ function Hero() {
                 memórias inesquecíveis.
               </p>
             </div>
-            <div className={style.sloganImg}>
-              <img src={slogan} alt="slogan" />
-            </div>
+
           </div>
         </section>
-        <footer className={style.footer}>
-          <div className={style.footerContent}>
-            <div className={style.footerImg}>
-              <img src={logo} alt="logo" />
-            </div>
-            <div className={style.footerNote}>
-              O Hotel 7 Lagos é o refúgio perfeito! Uma autêntica fazenda, onde
-              simplicidade, acolhimento e momentos inesquecíveis se encontram
-              aos pés da imponente Serra da Mantiqueira.
-            </div>
-            <div className={style.footerLocal}>
-              <p>Estrada Vicinal Tancredo Neves, Km 08 Guaratinguetá - SP</p>
-              <p>CEP 12508-000 </p>
-              <p>(12) 99615-1440</p> <p>reservas@hotel7lagos.com.br</p>
-              <p>CNPJ: 45.363.205/0001-70</p>
-            </div>
-          </div>
-        </footer>
+      
       </div>
     </>
   );

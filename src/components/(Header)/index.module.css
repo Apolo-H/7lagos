@@ -12,15 +12,18 @@
     font-family: "Montserrat", sans-serif;
 }
 
-.headerLogo img:first-child {
+.logoContainer {
     position: absolute;
     top: 4rem;
-    left: 12rem;
+}
+
+.logoContainer img {
     width: 260px;
     transform: rotate(-5deg);
 }
 
-.headerLogo img:last-child {
+
+.logoContainerScroll img {
     width: 200px;
 }
 
@@ -58,10 +61,25 @@
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+    .header {
+        justify-content: center;
+        padding: 0;
+    }
     .headerLinks {
         display: none;
     }
+    .logoContainer {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .logoContainer img {
+        transform: none;
+    }
+
+    
+
 }
 
 @keyframes sumir {
