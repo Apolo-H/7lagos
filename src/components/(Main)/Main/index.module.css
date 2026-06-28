@@ -13,10 +13,12 @@
 ═══════════════════════════════════════════════ */
 
 
-
 /* ══════════════════════════════════════════════
    HERO
 ══════════════════════════════════════════════ */
+
+/* #region hero */
+
 .hero {
     position: relative;
     width: 100%;
@@ -89,21 +91,32 @@
     margin: 0;
 }
 
+/* #endregion */
+
 /* ══════════════════════════════════════════════
    CONTAINER
 ══════════════════════════════════════════════ */
+
+/* #region container */
+
 .container {
     background: #f5f0e8;
     position: relative;
 }
 
+/* #endregion */
+
 /* ══════════════════════════════════════════════
    SEÇÕES — base compartilhada
 ══════════════════════════════════════════════ */
+
+/* #region Base Section Styles */
+
 .info,
 .avaliations,
 .atividades,
-.slogan {
+.slogan,
+.rancho {
     position: relative;
     min-height: 100vh;
     width: 100%;
@@ -111,6 +124,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 10rem 8vw;
+    box-sizing: border-box;
 }
 
 .sectionNum {
@@ -128,7 +142,6 @@
     letter-spacing: -0.04em;
 }
 
-
 .eyebrow {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.05rem;
@@ -139,9 +152,14 @@
     margin: 0 0 1.6rem;
 }
 
+/* #endregion */
+
 /* ══════════════════════════════════════════════
    SEÇÃO 01 — INFO
 ══════════════════════════════════════════════ */
+
+/* #region info */
+
 .info_intro {
     max-width: 72rem;
     margin-bottom: 6rem;
@@ -171,7 +189,11 @@
     width: 100%;
 }
 
+/* #endregion */
+
 /* ── Bento Grid ─────────────────────────────── */
+
+/* #region bentoGrid */
 
 .info_imgGrid {
     display: grid;
@@ -256,9 +278,14 @@
     margin: 0;
 }
 
+/*#endregion */
+
 /* ══════════════════════════════════════════════
    SEÇÃO 02 — AVALIAÇÕES
 ══════════════════════════════════════════════ */
+
+/* #region avaliacoes */
+
 .avaliations {
     background: #1a2e1a;
     color: #fefcf7;
@@ -396,15 +423,20 @@
     letter-spacing: 0.05em;
 }
 
+/* #endregion  */
+
 /* ══════════════════════════════════════════════
    SEÇÃO 03 — ATIVIDADES
 ══════════════════════════════════════════════ */
+
+/* #region Atividades*/
+
 .atividades {
     background: #fefcf7;
 }
 
 .atividades .sectionNum {
-    -webkit-text-stroke: 1px rgba(26, 46, 26, 0.05);
+    -webkit-text-stroke: 1px rgba(26, 46, 26, 0.15);
 }
 
 .atividadesContent {
@@ -476,14 +508,22 @@
     color: #1a2e1a;
 }
 
+/* #endregion */
 
 /* ══════════════════════════════════════════════
     SEÇÃO 04 — SLOGAN
 ══════════════════════════════════════════════ */
 
+/* #region slogan */
+
 .slogan {
     background: #fefcf7;
-    min-height: 50vh !important;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.slogan .sectionNum {
+    -webkit-text-stroke: 1px rgba(26, 46, 26, 0.15);
 }
 
 .sloganContent {
@@ -497,7 +537,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: 50%;
+    width: 55%;
 }
 
 .sloganTitle {
@@ -506,41 +546,121 @@
 }
 
 .sloganTitle h2 {
-    color: var(--color-primary);
-    width: 12.5em;
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1;
+    font-family: 'Cormorant Garamond', serif;
+    color: #1a2e1a;
+    font-size: clamp(2.4rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
 }
-
 
 .sloganTitle h2 span {
     display: block;
+    font-family: 'Cormorant Garamond', serif;
     color: #c9932a;
-    font-size: 40px;
-    font-weight: 700;
-    margin-top: 5px;
+    font-size: clamp(3.6rem, 6vw, 5.4rem);
+    font-weight: 600;
+    margin-top: 0.8rem;
 }
 
 .sloganSubTitle {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #555;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #4a4a3a;
+    margin: 0;
 }
+
+/* #endregion  */
+
+/* ══════════════════════════════════════════════
+    SEÇÃO 05 — RANCHO
+══════════════════════════════════════════════ */
+
+/* #region rancho */
+
+.rancho {
+    background-color: #1a2e1a;
+}
+
+.rancho .sectionNum {
+    -webkit-text-stroke: 1px rgba(201, 147, 42, 0.1);
+}
+
+.ranchoContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ranchoTitle h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.6rem, 5vw, 5.4rem);
+    font-weight: 400;
+    color: #fefcf7;
+    margin: 0 0 1.6rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+.ranchoSubTitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 2.4vw, 2.6rem);
+    font-style: italic;
+    line-height: 1.4;
+    color: rgba(254, 252, 247, 0.75);
+    margin: 0 0 4rem;
+    max-width: 64rem;
+}
+
+/* #endregion  */
 
 
 /* ══════════════════════════════════════════════
    RESPONSIVIDADE
 ══════════════════════════════════════════════ */
-@media (max-width: 1400px) {
+
+/* Telas Desktop Padrão e iMacs */
+@media (max-width: 1444px) {
+    .info_imgGrid {
+        gap: 1.4rem;
+    }
+    
+    .bentoItem {
+        height: 24rem;
+    }
+    
+    .itemSquare,
+    .itemWide {
+        height: 26rem;
+    }
+
     .atividadesBox {
         grid-template-columns: repeat(4, 1fr);
+        gap: 1.6rem;
     }
 }
 
+/* Telas de Notebooks, Tablets de Alta Resolução e iPads em paisagem */
 @media (max-width: 1024px) {
+    .info,
+    .avaliations,
+    .atividades,
+    .slogan,
+    .rancho {
+        padding: 9rem 6vw;
+    }
+
+    .sectionNum {
+        font-size: 11rem;
+        top: 4rem;
+    }
+
     .info_imgGrid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1.6rem;
     }
 
     .itemSmall,
@@ -548,15 +668,25 @@
     .itemSquare,
     .itemWide {
         grid-column: span 2;
-        height: 22rem;
+        height: 24rem;
+    }
+
+    .atividadesBox {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sloganText {
+        width: 75%;
     }
 }
 
+/* Smartphones Modernos e Tablets Médios */
 @media (max-width: 768px) {
-
     .info,
     .avaliations,
-    .atividades {
+    .atividades,
+    .slogan,
+    .rancho {
         padding: 8rem 5vw;
         min-height: auto;
     }
@@ -599,20 +729,27 @@
         gap: 1.4rem;
     }
 
-    .sloganTitle {
-        text-align: center;
-    }
-    .sloganSubTitle {
-        text-align: center;
-    }
     .sloganText {
         width: 100%;
+        gap: 1.6rem;
     }
+
+    .sloganTitle {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .sloganSubTitle {
+        text-align: center;
+        font-size: 1.6rem;
+    }
+
     .sloganContent {
         align-items: center;
     }
 }
 
+/* Smartphones Compactos */
 @media (max-width: 480px) {
     .atividadesBox {
         grid-template-columns: repeat(2, 1fr);
@@ -625,6 +762,4 @@
     .heroScrollCue {
         bottom: 2rem;
     }
-
-
 }

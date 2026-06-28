@@ -1,21 +1,23 @@
 import { useEffect, useRef } from "react";
 import style from "./index.module.css";
-import heroVideo from "../../../assets/SeteLagos/florest.mp4";
 import CheckIn from "../../(HeroCheckIn)/HeroCheckIn";
-import Header from "../../(Header)/Header"
+import Header from "../../(Header)/Header";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
+/* ─── Importações de Mídia Estáticas ───────────────────────── */
+import heroVideo from "../../../assets/florest.mp4";
 import imgDeckPool from "../../../assets/Foto+Joao+Athaide+(164)-1920w.webp";
 import imgMainPool from "../../../assets/Foto+Joao+Athaide+(182)-1920w.webp";
 import imgQuarto from "../../../assets/Foto+Joao+Athaide+(220)-8e7c62af-1920w.webp";
 import imgInfinityPool from "../../../assets/Foto+JoaÌ-o+AthaiÌ-de+(162)-1920w.webp";
 import userAvatar from "../../../assets/user.png";
+import Carousel from "../../carousel/Carousel";
 
-/* ─── dados ──────────────────────────────────────────────── */
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+/* ─── Dados de Configuração ───────────────────────────────── */
 const ATIVIDADES = [
   {
     src: "https://lirp.cdn-website.com/154997e9/dms3rep/multi/opt/escondeesconde-ed0ef56f-300w.png",
@@ -85,7 +87,6 @@ const REVIEWS = [
   },
 ];
 
-/* ─── componente ─────────────────────────────────────────── */
 function Hero() {
   const heroContentRef = useRef<HTMLDivElement | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
@@ -94,6 +95,7 @@ function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // 1 ── Revelação do Hero Content
       const heroChildren = heroContentRef.current?.children;
       if (heroChildren) {
         gsap.from(heroChildren, {
@@ -106,10 +108,10 @@ function Hero() {
         });
       }
 
+      // 2 ── Animação do Grid Bento
       const bentoItems = gridRef.current?.querySelectorAll(
         `.${style.bentoItem}`,
       );
-
       if (bentoItems?.length) {
         bentoItems.forEach((item, i) => {
           gsap.fromTo(
@@ -132,7 +134,7 @@ function Hero() {
         });
       }
 
-      /* 4 ── Intro de texto da seção info */
+      // 3 ── Intro de texto da seção info
       const infoIntroEl = document.querySelector(`.${style.info_intro}`);
       if (infoIntroEl) {
         gsap.fromTo(
@@ -153,7 +155,7 @@ function Hero() {
         );
       }
 
-      /* 5 ── Marca d´água das seções */
+      // 4 ── Marca d'água das seções
       document.querySelectorAll(`.${style.sectionNum}`).forEach((el) => {
         gsap.fromTo(
           el,
@@ -172,7 +174,7 @@ function Hero() {
         );
       });
 
-      /* 6 ── Cards de avaliação */
+      // 5 ── Cards de avaliação
       const reviewCards = document.querySelectorAll(`.${style.card}`);
       if (reviewCards.length) {
         gsap.fromTo(
@@ -193,6 +195,7 @@ function Hero() {
         );
       }
 
+      // 6 ── Grid de Atividades
       const cardsAtividades = atividadesBoxRef.current?.querySelectorAll(
         `.${style.img_wrap}`,
       );
@@ -223,6 +226,7 @@ function Hero() {
   return (
     <>
       <Header />
+
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className={style.hero} id="hero">
         <div className={style.heroOverlay} />
@@ -253,7 +257,6 @@ function Hero() {
           <span className={style.sectionNum} aria-hidden="true">
             01
           </span>
-
           <div className={style.info_intro}>
             <p className={style.eyebrow}>Por que nos escolher</p>
             <h2>
@@ -263,8 +266,7 @@ function Hero() {
             </h2>
             <p>
               Localização privilegiada, atendimento caloroso e infraestrutura
-              completa de lazer transformam cada estadia em uma experiência
-              verdadeiramente inesquecível.
+              completa de lazer transformam cada estadia em uma experiência.
             </p>
           </div>
 
@@ -303,7 +305,6 @@ function Hero() {
           <span className={style.sectionNum} aria-hidden="true">
             02
           </span>
-
           <div className={style.avaliationContent}>
             <p className={style.eyebrow}>O que dizem nossos hóspedes</p>
             <h2>
@@ -313,14 +314,10 @@ function Hero() {
             </h2>
             <blockquote className={style.featuredQuote}>
               "Ficamos todos admirados com o hotel fazenda desde o momento que
-              fizemos o check in! Todos os funcionários muito solícitos,
-              atenciosos e preocupados com o nosso bem estar. Restaurante
-              excelente — o café da tarde lá na Kika era nosso compromisso
-              diário!"
+              fizemos o check in! Todos muito solícitos e preocupados com o
+              nosso bem estar."
             </blockquote>
-            <cite className={style.authorHighlight}>
-              André — Booking.com · Agosto 2022
-            </cite>
+            <cite className={style.authorHighlight}>André — Booking.com</cite>
           </div>
 
           <div className={style.avaliationCards}>
@@ -347,7 +344,6 @@ function Hero() {
           <span className={style.sectionNum} aria-hidden="true">
             03
           </span>
-
           <div className={style.atividadesContent}>
             <p className={style.eyebrow}>Para toda a família</p>
             <h2>
@@ -365,7 +361,12 @@ function Hero() {
             </div>
           </div>
         </section>
+
+        {/* ── 04 SLOGAN ────────────────────────────── */}
         <section className={style.slogan}>
+          <span className={style.sectionNum} aria-hidden="true">
+            04
+          </span>
           <div className={style.sloganContent}>
             <div className={style.sloganTitle}>
               <h2>
@@ -376,19 +377,33 @@ function Hero() {
               <p className={style.sloganSubTitle}>
                 Descubra o Hotel 7 Lagos, uma autêntica fazenda aos pés da Serra
                 da Mantiqueira, onde a simplicidade e o acolhimento são a
-                essência. Desfrute de dias de tranquilidade, natureza e convívio
-                familiar, saboreando um café especial no fogão a lenha.
-                <br />
-                Para as crianças, há brincadeiras e atividades inclusas, como
-                passeios a cavalo. Sua família é nossa família – venha fazer
-                parte dessa experiência única e transforme sua estadia em
-                memórias inesquecíveis.
+                essência.
               </p>
             </div>
-
           </div>
         </section>
-      
+
+        {/* ── 05 RANCHO ────────────────────────────── */}
+        <section className={style.rancho}>
+          <span className={style.sectionNum} aria-hidden="true">
+            05
+          </span>
+
+          <div className={style.ranchoContent}>
+            <div className={style.ranchoTitle}>
+              <h2>CONHEÇA NOSSO RANCHO!</h2>
+            </div>
+            <div className={style.ranchoSubTitle}>
+              <p>
+                Aproveite a natureza em um passeio a cavalo revigorante em
+                família!
+              </p>
+            </div>
+          </div>
+          <div className={style.ranchoCarouselContainer}>
+            <Carousel />
+          </div>
+        </section>
       </div>
     </>
   );

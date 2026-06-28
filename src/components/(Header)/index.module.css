@@ -1,95 +1,104 @@
 .header {
     position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 10rem;
-    width: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
-    padding: 0 16rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    padding: 2rem 16rem 1rem;
     font-family: "Montserrat", sans-serif;
 }
 
-.logoContainer {
-    position: absolute;
-    top: 4rem;
-}
-
-.logoContainer img {
-    width: 260px;
-    transform: rotate(-5deg);
-}
-
-
-.logoContainerScroll img {
-    width: 200px;
-}
-
-
-.headerLinks ul {
-    display: flex;
-    gap: 4rem;
-    align-items: center;
-}
-
-.headerLinks li {
+.headerLogo {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.headerLinks a {
-    color: #fff;
-    font-size: 1.6rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
+.logoContainer {
+    position: relative;
+
+    img {
+        width: 260px;
+        transition: transform 0.3s ease, width 0.3s ease;
+    }
 }
 
-.headerLinks li::after {
-    content: '';
+.logoContainerScroll {
     position: absolute;
-    bottom: -0.5rem;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.3s ease;
+
+    img {
+        width: 200px;
+    }
 }
 
-.headerLinks li:hover::after {
-    width: 100%;
+.headerLinks {
+    ul {
+        display: flex;
+        gap: 4rem;
+        align-items: center;
+        text-wrap: nowrap;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+
+    a {
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
 }
 
+/* ================= RESPONSIVIDADE ================= */
+
+@media (max-width: 1024px) {
+    .header {
+        padding: 0;
+        height: 8rem;
+    }
+
+    .headerLinks {
+        display: none;
+    }
+}
 
 @media (max-width: 768px) {
     .header {
         justify-content: center;
-        padding: 0;
+
     }
-    .headerLinks {
-        display: none;
-    }
+
     .logoContainer {
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .logoContainer img {
-        transform: none;
-    }
 
-    
-
-}
-
-@keyframes sumir {
-    from {
-        opacity: 0;
-        transform: scale(1);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(0);
+        img {
+            transform: rotate(0deg);
+            width: 200px;
+        }
     }
 }

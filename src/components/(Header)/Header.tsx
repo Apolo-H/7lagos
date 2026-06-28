@@ -26,7 +26,7 @@ export default function Header() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#hero",
-          start: "bottom top",
+          start: "90% top",
           toggleActions: "play none none reverse",
         },
       });
