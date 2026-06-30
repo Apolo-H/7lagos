@@ -1,4 +1,4 @@
-import Style from "./index.module.css";
+import Style from "./checkIn.module.css";
 
 function CheckIn() {
   return (

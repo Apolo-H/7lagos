@@ -16,10 +16,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border-radius: 8px;
+  border-radius: 0.08rem;
   overflow: hidden;
+  margin-right: 1.4rem !important;
   background: #1a2e1a;
-  border: 1.4px solid rgba(201, 147, 42, 0.15);
+  border: 0.14rem solid rgba(201, 147, 42, 0.15);
   transition: transform 0.4s ease, border-color 0.4s ease;
 }
 
@@ -84,10 +85,10 @@
 .mainSwiper :global(.swiper-pagination-bullet) {
   background: #4a4a3a !important;
   opacity: 0.25;
-  width: 8px;
-  height: 8px;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
-  margin: 0 6px !important;
+  margin: 0 0.6rem !important;
   transition: opacity 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
 }
 

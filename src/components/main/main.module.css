@@ -118,13 +118,11 @@
 .slogan,
 .rancho {
     position: relative;
-    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 10rem 8vw;
-    box-sizing: border-box;
 }
 
 .sectionNum {
@@ -132,7 +130,7 @@
     top: 5rem;
     left: 6vw;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14rem;
+    font-size: 10rem;
     font-weight: 300;
     color: transparent;
     -webkit-text-stroke: 1px rgba(26, 46, 26, 0.07);
@@ -519,7 +517,6 @@
 .slogan {
     background: #fefcf7;
     justify-content: center;
-    min-height: 60vh;
 }
 
 .slogan .sectionNum {
@@ -622,29 +619,11 @@
    RESPONSIVIDADE
 ══════════════════════════════════════════════ */
 
-/* Telas Desktop Padrão e iMacs */
-@media (max-width: 1444px) {
-    .info_imgGrid {
-        gap: 1.4rem;
-    }
-    
-    .bentoItem {
-        height: 24rem;
-    }
-    
-    .itemSquare,
-    .itemWide {
-        height: 26rem;
-    }
 
-    .atividadesBox {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.6rem;
-    }
-}
 
 /* Telas de Notebooks, Tablets de Alta Resolução e iPads em paisagem */
 @media (max-width: 1024px) {
+
     .info,
     .avaliations,
     .atividades,
@@ -682,12 +661,13 @@
 
 /* Smartphones Modernos e Tablets Médios */
 @media (max-width: 768px) {
+
     .info,
     .avaliations,
     .atividades,
     .slogan,
     .rancho {
-        padding: 8rem 5vw;
+        padding: 6rem 5vw;
         min-height: auto;
     }
 

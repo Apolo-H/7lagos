@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import style from "./index.module.css";
+import style from "./carousel.module.css";
 
 import rancho1 from "/rancho(1).webp";
 import rancho2 from "/rancho(2).webp";

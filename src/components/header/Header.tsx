@@ -1,0 +1,165 @@
+import { useRef, useEffect, useState } from "react";
+import style from "./header.module.css";
+import Logo from "../../assets/logo.png";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const logoIniciaRef = useRef<HTMLImageElement | null>(null);
+  const logoScrolRef = useRef<HTMLImageElement | null>(null);
+  const linksContainerRef = useRef<HTMLUListElement | null>(null);
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (
+      !logoIniciaRef.current ||
+      !logoScrolRef.current ||
+      !linksContainerRef.current ||
+      !headerRef.current
+    ) {
+      return;
+    }
+
+    let ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "70% top", 
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      tl.to(headerRef.current, {
+        backgroundColor: "#1a2e1a", 
+        borderBottom: "1px solid rgba(201, 147, 42, 0.15)",
+        paddingTop: "1.2rem",
+        paddingBottom: "1.2rem",
+        duration: 0.4,
+      });
+
+      tl.to(
+        logoIniciaRef.current,
+        {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.inOut",
+        },
+        0,
+      );
+
+      tl.to(
+        logoScrolRef.current,
+        {
+          keyframes: [
+            { display: "block", duration: 0 },
+            { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
+          ],
+        },
+        0.1, 
+      );
+
+    
+      const links = linksContainerRef.current?.querySelectorAll("a");
+      if (links && links.length > 0) {
+        tl.to(
+          links,
+          {
+            color: "#fefcf7",
+            duration: 0.3,
+          },
+          0,
+        );
+      }
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <header
+      ref={headerRef}
+      className={`${style.header} ${isMenuOpen ? style.menuOpen : ""}`}
+    >
+      <div className={style.headerContent}>
+        <div className={style.headerLogo}>
+          <div className={style.logoContainer}>
+            <img
+              ref={logoIniciaRef}
+              src={Logo}
+              alt="Logo do Hotel Sete Lagos"
+            />
+          </div>
+          <div className={style.logoContainerScroll}>
+            <a href="#">
+              <img
+                ref={logoScrolRef}
+                src={Logo}
+                style={{ opacity: 0, scale: 0.8, display: "none" }}
+                alt="Logo do Hotel Sete Lagos scroll"
+              />
+            </a>
+          </div>
+        </div>
+
+        <nav className={style.headerLinks}>
+          <ul ref={linksContainerRef}>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Hotel
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Acomodações
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Refeições
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Diversão
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Day Use e Eventos
+              </a>
+            </li>
+            <li>
+              <a href="#" onClick={() => setIsMenuOpen(false)}>
+                Ranchos
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div
+          className={style.headerHamburgue}
+          onClick={toggleMenu}
+          aria-label="Abrir Menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+  );
+}

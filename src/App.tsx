@@ -1,10 +1,10 @@
 import "./App.css";
-import Hero from "./components/(Main)/Main/Main";
+import Main from "./components/main/Main";
 
 export default function App() {
   return (
     <>
-      <Hero />
+      <Main />
     </>
   )
 }

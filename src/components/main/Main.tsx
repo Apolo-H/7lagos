@@ -1,19 +1,19 @@
 import { useEffect, useRef } from "react";
-import style from "./index.module.css";
-import CheckIn from "../../(HeroCheckIn)/HeroCheckIn";
-import Header from "../../(Header)/Header";
+import style from "./main.module.css";
+import CheckIn from "../../components/HeroCheckIn/HeroCheckIn";
+import Header from "../../components/header/Header";
+import Carousel from "../../components/carousel/Carousel";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 /* ─── Importações de Mídia Estáticas ───────────────────────── */
-import heroVideo from "../../../assets/florest.mp4";
-import imgDeckPool from "../../../assets/Foto+Joao+Athaide+(164)-1920w.webp";
-import imgMainPool from "../../../assets/Foto+Joao+Athaide+(182)-1920w.webp";
-import imgQuarto from "../../../assets/Foto+Joao+Athaide+(220)-8e7c62af-1920w.webp";
-import imgInfinityPool from "../../../assets/Foto+JoaÌ-o+AthaiÌ-de+(162)-1920w.webp";
-import userAvatar from "../../../assets/user.png";
-import Carousel from "../../carousel/Carousel";
+import heroVideo from "../../assets/florest.mp4";
+import imgDeckPool from "../../assets/Foto+Joao+Athaide+(164)-1920w.webp";
+import imgMainPool from "../../assets/Foto+Joao+Athaide+(182)-1920w.webp";
+import imgQuarto from "../../assets/Foto+Joao+Athaide+(220)-8e7c62af-1920w.webp";
+import imgInfinityPool from "../../assets/Foto+JoaÌ-o+AthaiÌ-de+(162)-1920w.webp";
+import userAvatar from "../../assets/user.png";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -87,7 +87,7 @@ const REVIEWS = [
   },
 ];
 
-function Hero() {
+function Main() {
   const heroContentRef = useRef<HTMLDivElement | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -184,7 +184,7 @@ function Hero() {
             opacity: 1,
             y: 0,
             duration: 0.7,
-            stagger: 0.12,
+            stagger: 0.26,
             ease: "power2.out",
             scrollTrigger: {
               trigger: reviewCards[0].closest("section"),
@@ -409,4 +409,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default Main;

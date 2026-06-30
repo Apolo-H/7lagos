@@ -1,0 +1,212 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: auto;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem 8vw 1rem;
+    
+}
+
+.headerLogo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 6rem;
+    width: 26rem;
+}
+
+.logoContainer,
+.logoContainerScroll {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer img {
+    width: 26rem;
+    height: auto;
+}
+
+.logoContainerScroll img {
+    width: 20rem;
+    height: auto;
+}
+
+.headerLinks {
+    display: flex;
+    align-items: center;
+}
+
+.headerLinks ul {
+    display: flex;
+    gap: 3.2rem;
+    align-items: center;
+    text-wrap: nowrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.headerLinks li {
+    position: relative;
+}
+
+.headerLinks li::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: #fefcf7;
+    transition: width 0.3s ease;
+}
+
+.headerLinks li:hover::after {
+    width: 100%;
+}
+
+.headerLinks a {
+    color: #fefcf7;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.headerLinks a:hover {
+    opacity: 0.9;
+}
+
+
+.headerHamburgue {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    z-index: 1010;
+}
+
+.headerHamburgue span {
+    display: block;
+    width: 2.6rem;
+    height: 2px;
+    background-color: #fefcf7;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.menuOpen .headerHamburgue span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menuOpen .headerHamburgue span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuOpen .headerHamburgue span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ================= RESPONSIVIDADE ================= */
+
+@media (max-width: 1150px) {
+    .headerContent {
+        padding: 2rem 5vw;
+    }
+
+    .headerLinks ul {
+        gap: 1.8rem;
+    }
+
+    .headerLinks a {
+        font-size: 1.4rem;
+    }
+
+    .headerLogo {
+        width: 200px;
+    }
+
+    .logoContainer img {
+        width: 200px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .headerContent {
+        padding: 1.5rem 6vw;
+    }
+
+    .headerLogo {
+        width: 180px;
+        height: 50px;
+    }
+
+    .logoContainer img,
+    .logoContainerScroll img {
+        width: 180px !important;
+    }
+
+    .headerHamburgue {
+        display: flex;
+    }
+
+    .headerLinks {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: #1a2e1a;
+        border-left: 1px solid rgba(201, 147, 42, 0.2);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+        padding: 12rem 4rem 4rem;
+        box-sizing: border-box;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        align-items: flex-start;
+        z-index: 1005;
+    }
+
+    .menuOpen .headerLinks {
+        right: 0;
+    }
+
+    .headerLinks ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+        width: 100%;
+    }
+
+    .headerLinks a {
+        font-size: 1.8rem;
+    }
+
+    .headerLinks li::after {
+        background-color: #c9932a;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerLinks {
+        width: 100%;
+
+    }
+}

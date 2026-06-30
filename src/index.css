@@ -16,7 +16,7 @@ html, body {
     overflow-x: hidden;
     font-family: "Montserrat", sans-serif;
     scroll-behavior: smooth;
-    min-width: 300px;
+    min-width: 280px;
 }
 
 img {
