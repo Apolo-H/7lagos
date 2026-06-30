@@ -8,9 +8,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const logoIniciaRef = useRef<HTMLImageElement | null>(null);
-  const logoScrolRef = useRef<HTMLImageElement | null>(null);
   const linksContainerRef = useRef<HTMLUListElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
 
@@ -20,8 +17,6 @@ export default function Header() {
 
   useEffect(() => {
     if (
-      !logoIniciaRef.current ||
-      !logoScrolRef.current ||
       !linksContainerRef.current ||
       !headerRef.current
     ) {
@@ -45,29 +40,7 @@ export default function Header() {
         duration: 0.4,
       });
 
-      tl.to(
-        logoIniciaRef.current,
-        {
-          scale: 0.8,
-          opacity: 0,
-          duration: 0.3,
-          ease: "power2.inOut",
-        },
-        0,
-      );
-
-      tl.to(
-        logoScrolRef.current,
-        {
-          keyframes: [
-            { display: "block", duration: 0 },
-            { scale: 1, opacity: 1, duration: 0.4, ease: "power2.out" },
-          ],
-        },
-        0.1, 
-      );
-
-    
+      
       const links = linksContainerRef.current?.querySelectorAll("a");
       if (links && links.length > 0) {
         tl.to(
@@ -93,20 +66,9 @@ export default function Header() {
         <div className={style.headerLogo}>
           <div className={style.logoContainer}>
             <img
-              ref={logoIniciaRef}
               src={Logo}
               alt="Logo do Hotel Sete Lagos"
             />
-          </div>
-          <div className={style.logoContainerScroll}>
-            <a href="#">
-              <img
-                ref={logoScrolRef}
-                src={Logo}
-                style={{ opacity: 0, scale: 0.8, display: "none" }}
-                alt="Logo do Hotel Sete Lagos scroll"
-              />
-            </a>
           </div>
         </div>
 

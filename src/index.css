@@ -11,13 +11,18 @@
     list-style: none;
 }
 
+
+
 html, body {
-    font-size: 62.5%;
     overflow-x: hidden;
     font-family: "Montserrat", sans-serif;
     scroll-behavior: smooth;
     min-width: 280px;
+    -webkit-font-smoothing: antialiased;
+
 }
+
+
 
 img {
     width: 100%; 

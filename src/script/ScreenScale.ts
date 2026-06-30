@@ -6,9 +6,9 @@ export default function FontScaler() {
 
 
   useEffect(() => {
-    const minWidth = 1440; 
+    const minWidth = 1920; 
     const minFontSize = 62.25; // 56.2 <-- Base padrão
-    const maxFontSize = 250;
+    const maxFontSize = 375;
 
     const updateFontSize = () => {
       const width = window.innerWidth;

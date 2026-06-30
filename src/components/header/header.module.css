@@ -27,8 +27,7 @@
     width: 26rem;
 }
 
-.logoContainer,
-.logoContainerScroll {
+.logoContainer {
     position: absolute;
     left: 0;
     display: flex;
@@ -36,14 +35,9 @@
 }
 
 .logoContainer img {
-    width: 26rem;
-    height: auto;
+    width: 22rem;
 }
 
-.logoContainerScroll img {
-    width: 20rem;
-    height: auto;
-}
 
 .headerLinks {
     display: flex;

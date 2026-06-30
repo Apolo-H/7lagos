@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import style from "./main.module.css";
-import CheckIn from "../../components/HeroCheckIn/HeroCheckIn";
 import Header from "../../components/header/Header";
 import Carousel from "../../components/carousel/Carousel";
 import gsap from "gsap";
@@ -14,6 +13,7 @@ import imgMainPool from "../../assets/Foto+Joao+Athaide+(182)-1920w.webp";
 import imgQuarto from "../../assets/Foto+Joao+Athaide+(220)-8e7c62af-1920w.webp";
 import imgInfinityPool from "../../assets/Foto+JoaÌ-o+AthaiÌ-de+(162)-1920w.webp";
 import userAvatar from "../../assets/user.png";
+import Logo from "../../assets/logo.png";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -246,12 +246,11 @@ function Main() {
             Luxo, natureza e memórias que duram para sempre.
           </p>
         </div>
-
-        <CheckIn />
       </section>
 
-      {/* ── CONTEÚDO ─────────────────────────────────────── */}
+      {/* ── CONTEÚDO TRAVADO (1440px) ─────────────────────── */}
       <div ref={containerRef} className={style.container}>
+        
         {/* ── 01 INFO ──────────────────────────────────── */}
         <section className={style.info}>
           <span className={style.sectionNum} aria-hidden="true">
@@ -340,7 +339,7 @@ function Main() {
         </section>
 
         {/* ── 03 ATIVIDADES ────────────────────────────── */}
-        <section className={style.atividades}>
+        <section className={style.atividades} id="atividades">
           <span className={style.sectionNum} aria-hidden="true">
             03
           </span>
@@ -384,7 +383,7 @@ function Main() {
         </section>
 
         {/* ── 05 RANCHO ────────────────────────────── */}
-        <section className={style.rancho}>
+        <section className={style.rancho} id="rancho">
           <span className={style.sectionNum} aria-hidden="true">
             05
           </span>
@@ -404,6 +403,71 @@ function Main() {
             <Carousel />
           </div>
         </section>
+
+        {/* ── 06 FOOTER INTEGRADO ────────────────────────── */}
+        <footer className={style.footer}>
+          <div className={style.footerContainer}>
+            
+            {/* Coluna da Logo e Descrição */}
+            <div className={style.footerBrand}>
+              <div className={style.footerLogo}>
+                <img src={Logo} alt="Sete Lagos Logo" />
+              </div>
+              <p className={style.footerDescription}>
+                Um refúgio exclusivo onde a sofisticação encontra a serenidade
+                da natureza. Viva experiências inesquecíveis.
+              </p>
+              <div className={style.footerSocials}>
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="Facebook">FB</a>
+                <a href="#" aria-label="YouTube">YT</a>
+              </div>
+            </div>
+
+            {/* Colunas de Links */}
+            <div className={style.footerNav}>
+              <div className={style.footerNavCol}>
+                <h4>Navegação</h4>
+                <ul>
+                  <li><a href="#hero">Início</a></li>
+                  <li><a href="#info">Sobre Nós</a></li>
+                  <li><a href="#atividades">Atividades</a></li>
+                  <li><a href="#rancho">O Rancho</a></li>
+                </ul>
+              </div>
+
+              <div className={style.footerNavCol}>
+                <h4>Contato</h4>
+                <ul>
+                  <li>
+                    <a href="https://wa.me/seunúmero" target="_blank" rel="noreferrer">
+                      Reservas via WhatsApp
+                    </a>
+                  </li>
+                  <li><p>contato@setelagos.com.br</p></li>
+                  <li><p>+55 (11) 99999-9999</p></li>
+                </ul>
+              </div>
+
+              <div className={style.footerNavCol}>
+                <h4>Localização</h4>
+                <ul>
+                  <li><p>Estrada das Sete Lagoas, Km 12</p></li>
+                  <li><p>Região dos Lagos — SP</p></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <div className={style.footerBottom}>
+            <div className={style.footerBottomContent}>
+              <p>&copy; {new Date().getFullYear()} Sete Lagos. Todos os direitos reservados.</p>
+              <p className={style.developerCredit}>Desenvolvido com elegância</p>
+            </div>
+          </div>
+        </footer>
+
       </div>
     </>
   );

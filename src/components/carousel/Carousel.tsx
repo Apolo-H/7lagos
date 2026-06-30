@@ -41,7 +41,6 @@ export default function Carousel() {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        spaceBetween={24}
         loop={true}
         grabCursor={true}
         pagination={{
