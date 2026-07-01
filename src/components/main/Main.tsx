@@ -88,131 +88,241 @@ const REVIEWS = [
 ];
 
 function Main() {
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
   const heroContentRef = useRef<HTMLDivElement | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const atividadesBoxRef = useRef<HTMLDivElement | null>(null);
+  const sloganRef = useRef<HTMLDivElement | null>(null);
+  const ranchoRef = useRef<HTMLDivElement | null>(null);
+  const footerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1 ── Revelação do Hero Content
+      // 1 ── Hero: Movimento contido e refinado
+      if (heroVideoRef.current) {
+        gsap.fromTo(
+          heroVideoRef.current,
+          { scale: 1.05 },
+          { scale: 1, duration: 2, ease: "power2.out" },
+        );
+      }
+
       const heroChildren = heroContentRef.current?.children;
       if (heroChildren) {
-        gsap.from(heroChildren, {
+        gsap.fromTo(
+          heroChildren,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2,
+          },
+        );
+
+        // Parallax sutil
+        gsap.to(heroContentRef.current, {
+          y: 40,
           opacity: 0,
-          y: 60,
-          duration: 1.1,
-          stagger: 0.14,
-          ease: "power4.out",
-          delay: 0.2,
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
         });
       }
 
-      // 2 ── Animação do Grid Bento
+      // 2 ── Grid Bento: Deslizamento curto e elegante
       const bentoItems = gridRef.current?.querySelectorAll(
         `.${style.bentoItem}`,
       );
       if (bentoItems?.length) {
-        bentoItems.forEach((item, i) => {
-          gsap.fromTo(
-            item,
-            { opacity: 0, y: 56, scale: 0.96 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.85,
-              delay: i * 0.09,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: gridRef.current,
-                start: "top 72%",
-                once: true,
-              },
-            },
-          );
-        });
-      }
-
-      // 3 ── Intro de texto da seção info
-      const infoIntroEl = document.querySelector(`.${style.info_intro}`);
-      if (infoIntroEl) {
         gsap.fromTo(
-          [...infoIntroEl.children],
-          { opacity: 0, y: 36 },
+          bentoItems,
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
+            duration: 1,
+            stagger: 0.1,
+            ease: "power3.out",
             scrollTrigger: {
-              trigger: infoIntroEl,
-              start: "top 78%",
+              trigger: gridRef.current,
+              start: "top 85%",
               once: true,
             },
           },
         );
       }
 
-      // 4 ── Marca d'água das seções
+      // 3 ── Textos de Intro: Fade in maduro
+      const infoIntroEl = document.querySelector(`.${style.info_intro}`);
+      if (infoIntroEl) {
+        gsap.fromTo(
+          [...infoIntroEl.children],
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: infoIntroEl,
+              start: "top 85%",
+              once: true,
+            },
+          },
+        );
+      }
+
+      // 4 ── Marca d'água: Revelação suave sem alterar tamanho
       document.querySelectorAll(`.${style.sectionNum}`).forEach((el) => {
         gsap.fromTo(
           el,
-          { opacity: 0, x: -32 },
+          { opacity: 0 },
           {
-            opacity: 1,
-            x: 0,
-            duration: 1.0,
-            ease: "power3.out",
+            opacity: 0.4,
+            duration: 1.5,
+            ease: "power2.inOut",
             scrollTrigger: {
               trigger: el.closest("section"),
-              start: "top 65%",
+              start: "top 75%",
               once: true,
             },
           },
         );
       });
 
-      // 5 ── Cards de avaliação
+      // 5 ── Cards de avaliação: Cascata leve de baixo para cima
       const reviewCards = document.querySelectorAll(`.${style.card}`);
       if (reviewCards.length) {
         gsap.fromTo(
           reviewCards,
-          { opacity: 0, y: 48 },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.7,
-            stagger: 0.26,
-            ease: "power2.out",
+            duration: 0.9,
+            stagger: 0.1,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: reviewCards[0].closest("section"),
-              start: "top 72%",
+              start: "top 80%",
               once: true,
             },
           },
         );
       }
 
-      // 6 ── Grid de Atividades
+      // 6 ── Grid de Atividades: Sem pulos, apenas opacidade e deslize fino
       const cardsAtividades = atividadesBoxRef.current?.querySelectorAll(
         `.${style.img_wrap}`,
       );
       if (cardsAtividades?.length) {
         gsap.fromTo(
           cardsAtividades,
-          { opacity: 0, y: 32, scale: 0.92 },
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.55,
+            duration: 0.6,
             stagger: 0.04,
-            ease: "back.out(1.5)",
+            ease: "power2.out",
             scrollTrigger: {
               trigger: atividadesBoxRef.current,
               start: "top 85%",
+              once: true,
+            },
+          },
+        );
+      }
+
+      // 7 ── Slogan: Suave e direto
+      const sloganElements = sloganRef.current?.querySelectorAll("h2, p");
+      if (sloganElements?.length) {
+        gsap.fromTo(
+          sloganElements,
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: sloganRef.current,
+              start: "top 80%",
+              once: true,
+            },
+          },
+        );
+      }
+
+      const ranchoContent = ranchoRef.current?.querySelector(
+        `.${style.ranchoContent}`,
+      )?.children;
+      const ranchoCarousel = ranchoRef.current?.querySelector(
+        `.${style.ranchoCarouselContainer}`,
+      );
+
+      if (ranchoContent) {
+        gsap.fromTo(
+          ranchoContent,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ranchoRef.current,
+              start: "top 80%",
+              once: true,
+            },
+          },
+        );
+      }
+      if (ranchoCarousel) {
+        gsap.fromTo(
+          ranchoCarousel,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ranchoCarousel,
+              start: "top 85%",
+              once: true,
+            },
+          },
+        );
+      }
+
+      // 9 ── Rodapé: Cascata final elegante
+      const footerCols = footerRef.current?.querySelectorAll(
+        `.${style.footerBrand}, .${style.footerNavCol}`,
+      );
+      if (footerCols?.length) {
+        gsap.fromTo(
+          footerCols,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: "top 90%",
               once: true,
             },
           },
@@ -231,6 +341,7 @@ function Main() {
       <section className={style.hero} id="hero">
         <div className={style.heroOverlay} />
         <video
+          ref={heroVideoRef}
           className={style.heroBackgroundVideo}
           src={heroVideo}
           autoPlay
@@ -248,11 +359,9 @@ function Main() {
         </div>
       </section>
 
-      {/* ── CONTEÚDO TRAVADO (1440px) ─────────────────────── */}
       <div ref={containerRef} className={style.container}>
-        
         {/* ── 01 INFO ──────────────────────────────────── */}
-        <section className={style.info}>
+        <section className={style.info} id="info">
           <span className={style.sectionNum} aria-hidden="true">
             01
           </span>
@@ -362,7 +471,7 @@ function Main() {
         </section>
 
         {/* ── 04 SLOGAN ────────────────────────────── */}
-        <section className={style.slogan}>
+        <section ref={sloganRef} className={style.slogan}>
           <span className={style.sectionNum} aria-hidden="true">
             04
           </span>
@@ -383,7 +492,7 @@ function Main() {
         </section>
 
         {/* ── 05 RANCHO ────────────────────────────── */}
-        <section className={style.rancho} id="rancho">
+        <section ref={ranchoRef} className={style.rancho} id="rancho">
           <span className={style.sectionNum} aria-hidden="true">
             05
           </span>
@@ -405,10 +514,8 @@ function Main() {
         </section>
 
         {/* ── 06 FOOTER INTEGRADO ────────────────────────── */}
-        <footer className={style.footer}>
+        <footer ref={footerRef} className={style.footer}>
           <div className={style.footerContainer}>
-            
-            {/* Coluna da Logo e Descrição */}
             <div className={style.footerBrand}>
               <div className={style.footerLogo}>
                 <img src={Logo} alt="Sete Lagos Logo" />
@@ -418,21 +525,34 @@ function Main() {
                 da natureza. Viva experiências inesquecíveis.
               </p>
               <div className={style.footerSocials}>
-                <a href="#" aria-label="Instagram">IG</a>
-                <a href="#" aria-label="Facebook">FB</a>
-                <a href="#" aria-label="YouTube">YT</a>
+                <a href="#" aria-label="Instagram">
+                  IG
+                </a>
+                <a href="#" aria-label="Facebook">
+                  FB
+                </a>
+                <a href="#" aria-label="YouTube">
+                  YT
+                </a>
               </div>
             </div>
 
-            {/* Colunas de Links */}
             <div className={style.footerNav}>
               <div className={style.footerNavCol}>
                 <h4>Navegação</h4>
                 <ul>
-                  <li><a href="#hero">Início</a></li>
-                  <li><a href="#info">Sobre Nós</a></li>
-                  <li><a href="#atividades">Atividades</a></li>
-                  <li><a href="#rancho">O Rancho</a></li>
+                  <li>
+                    <a href="#hero">Início</a>
+                  </li>
+                  <li>
+                    <a href="#info">Sobre Nós</a>
+                  </li>
+                  <li>
+                    <a href="#atividades">Atividades</a>
+                  </li>
+                  <li>
+                    <a href="#rancho">O Rancho</a>
+                  </li>
                 </ul>
               </div>
 
@@ -440,34 +560,49 @@ function Main() {
                 <h4>Contato</h4>
                 <ul>
                   <li>
-                    <a href="https://wa.me/seunúmero" target="_blank" rel="noreferrer">
+                    <a
+                      href="https://wa.me/seunúmero"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       Reservas via WhatsApp
                     </a>
                   </li>
-                  <li><p>contato@setelagos.com.br</p></li>
-                  <li><p>+55 (11) 99999-9999</p></li>
+                  <li>
+                    <p>contato@setelagos.com.br</p>
+                  </li>
+                  <li>
+                    <p>+55 (11) 99999-9999</p>
+                  </li>
                 </ul>
               </div>
 
               <div className={style.footerNavCol}>
                 <h4>Localização</h4>
                 <ul>
-                  <li><p>Estrada das Sete Lagoas, Km 12</p></li>
-                  <li><p>Região dos Lagos — SP</p></li>
+                  <li>
+                    <p>Estrada das Sete Lagoas, Km 12</p>
+                  </li>
+                  <li>
+                    <p>Região dos Lagos — SP</p>
+                  </li>
                 </ul>
               </div>
             </div>
-
           </div>
 
           <div className={style.footerBottom}>
             <div className={style.footerBottomContent}>
-              <p>&copy; {new Date().getFullYear()} Sete Lagos. Todos os direitos reservados.</p>
-              <p className={style.developerCredit}>Desenvolvido com elegância</p>
+              <p>
+                &copy; {new Date().getFullYear()} Sete Lagos. Todos os direitos
+                reservados.
+              </p>
+              <p className={style.developerCredit}>
+                Desenvolvido com elegância
+              </p>
             </div>
           </div>
         </footer>
-
       </div>
     </>
   );
