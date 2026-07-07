@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import style from "./main.module.css";
-import Header from "../../components/header/Header";
 import Carousel from "../../components/carousel/Carousel";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -99,7 +98,6 @@ function Main() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1 ── Hero: Movimento contido e refinado
       if (heroVideoRef.current) {
         gsap.fromTo(
           heroVideoRef.current,
@@ -123,7 +121,6 @@ function Main() {
           },
         );
 
-        // Parallax sutil
         gsap.to(heroContentRef.current, {
           y: 40,
           opacity: 0,
@@ -136,7 +133,6 @@ function Main() {
         });
       }
 
-      // 2 ── Grid Bento: Deslizamento curto e elegante
       const bentoItems = gridRef.current?.querySelectorAll(
         `.${style.bentoItem}`,
       );
@@ -159,7 +155,6 @@ function Main() {
         );
       }
 
-      // 3 ── Textos de Intro: Fade in maduro
       const infoIntroEl = document.querySelector(`.${style.info_intro}`);
       if (infoIntroEl) {
         gsap.fromTo(
@@ -180,7 +175,6 @@ function Main() {
         );
       }
 
-      // 4 ── Marca d'água: Revelação suave sem alterar tamanho
       document.querySelectorAll(`.${style.sectionNum}`).forEach((el) => {
         gsap.fromTo(
           el,
@@ -198,7 +192,6 @@ function Main() {
         );
       });
 
-      // 5 ── Cards de avaliação: Cascata leve de baixo para cima
       const reviewCards = document.querySelectorAll(`.${style.card}`);
       if (reviewCards.length) {
         gsap.fromTo(
@@ -219,7 +212,6 @@ function Main() {
         );
       }
 
-      // 6 ── Grid de Atividades: Sem pulos, apenas opacidade e deslize fino
       const cardsAtividades = atividadesBoxRef.current?.querySelectorAll(
         `.${style.img_wrap}`,
       );
@@ -242,7 +234,6 @@ function Main() {
         );
       }
 
-      // 7 ── Slogan: Suave e direto
       const sloganElements = sloganRef.current?.querySelectorAll("h2, p");
       if (sloganElements?.length) {
         gsap.fromTo(
@@ -306,7 +297,6 @@ function Main() {
         );
       }
 
-      // 9 ── Rodapé: Cascata final elegante
       const footerCols = footerRef.current?.querySelectorAll(
         `.${style.footerBrand}, .${style.footerNavCol}`,
       );
@@ -335,7 +325,6 @@ function Main() {
 
   return (
     <>
-      <Header />
 
       {/* ── HERO ─────────────────────────────────────────── */}
       <section className={style.hero} id="hero">
@@ -360,6 +349,7 @@ function Main() {
       </section>
 
       <div ref={containerRef} className={style.container}>
+      
         {/* ── 01 INFO ──────────────────────────────────── */}
         <section className={style.info} id="info">
           <span className={style.sectionNum} aria-hidden="true">

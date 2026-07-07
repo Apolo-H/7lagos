@@ -16,7 +16,8 @@
     color: var(--color-ivory);
 }
 
-html, body {
+html,
+body {
     overflow-x: hidden;
     font-family: "Montserrat", sans-serif;
     scroll-behavior: smooth;
@@ -25,10 +26,13 @@ html, body {
 
 }
 
-
+.pageInternal {
+    padding-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+}
 
 img {
-    width: 100%; 
-    height: auto;  
-    display: block;  
+    width: 100%;
+    height: auto;
+    display: block;
 }

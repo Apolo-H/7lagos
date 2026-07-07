@@ -2,12 +2,15 @@ import { useRef, useEffect, useState } from "react";
 import style from "./header.module.css";
 import Logo from "../../assets/logo.png";
 import gsap from "gsap";
+import { Link, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
   const linksContainerRef = useRef<HTMLUListElement | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
@@ -16,60 +19,84 @@ export default function Header() {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
   useEffect(() => {
-    if (!linksContainerRef.current || !headerRef.current) {
+    if (
+      !linksContainerRef.current ||
+      !headerRef.current ||
+      !progressBarRef.current
+    ) {
       return;
     }
+    ScrollTrigger.getAll().forEach((t) => t.kill());
 
-    let ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "70% top",
-          toggleActions: "play none none reverse",
-        },
-      });
-
+    const ctx = gsap.context(() => {
       gsap.to(progressBarRef.current, {
         scaleX: 1,
         ease: "none",
         scrollTrigger: {
-          trigger: document.body,
+          trigger: document.documentElement,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.3, // Suaviza a barra
+          scrub: 0.3,
         },
       });
 
-      tl.to(headerRef.current, {
-        backgroundColor: "#1a2e1a",
-        borderBottom: "1px solid rgba(201, 147, 42, 0.15)",
-        paddingTop: "1.2rem",
-        paddingBottom: "1.2rem",
-        duration: 0.4,
-      });
+      const heroElement = document.querySelector("#hero");
 
-      const links = linksContainerRef.current?.querySelectorAll("a");
-      if (links && links.length > 0) {
-        tl.to(
-          links,
-          {
-            color: "#fefcf7",
-            duration: 0.3,
+      if (heroElement) {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#hero",
+            start: "70% top",
+            toggleActions: "play none none reverse",
           },
-          0,
-        );
+        });
+
+        tl.to(headerRef.current, {
+          backgroundColor: "#1a2e1a",
+          borderBottom: "1px solid rgba(201, 147, 42, 0.15)",
+          paddingTop: "1.2rem",
+          paddingBottom: "1.2rem",
+          duration: 0.4,
+        });
+
+        const links = linksContainerRef.current?.querySelectorAll("a");
+        if (links && links.length > 0) {
+          tl.to(
+            links,
+            {
+              color: "#fefcf7",
+              duration: 0.3,
+            },
+            0,
+          );
+        }
+      } else {
+        gsap.set(headerRef.current, {
+          backgroundColor: "#1a2e1a",
+          borderBottom: "1px solid rgba(201, 147, 42, 0.15)",
+          paddingTop: "1.2rem",
+          paddingBottom: "1.2rem",
+        });
+
+        const links = linksContainerRef.current?.querySelectorAll("a");
+        if (links && links.length > 0) {
+          gsap.set(links, { color: "#fefcf7" });
+        }
       }
     });
 
+    ScrollTrigger.refresh();
+
     return () => ctx.revert();
-  }, []);
+  }, [location.pathname]);
 
   return (
-    <header
-      ref={headerRef}
-      className={`${style.header} ${isMenuOpen ? style.menuOpen : ""}`}
-    >
+    <>
       <div
         ref={progressBarRef}
         style={{
@@ -78,70 +105,58 @@ export default function Header() {
           left: 0,
           height: "4px",
           width: "100%",
-          backgroundColor: "#D4AF37", // Dourado luxuoso
-          zIndex: 9999,
-          transformOrigin: "0% 50%",
+          backgroundColor: "#D4AF37",
+          zIndex: 10000,
+          transformOrigin: "left center",
           transform: "scaleX(0)",
+          pointerEvents: "none",
         }}
       />
 
-      <div className={style.headerContent}>
-        <div className={style.headerLogo}>
-          <div className={style.logoContainer}>
-            <img src={Logo} alt="Logo do Hotel Sete Lagos" />
+      <header
+        ref={headerRef}
+        className={`${style.header} ${isMenuOpen ? style.menuOpen : ""}`}
+      >
+        <div className={style.headerContent}>
+          <div className={style.headerLogo}>
+            <div className={style.logoContainer}>
+              <img src={Logo} alt="Logo do Hotel Sete Lagos" />
+            </div>
+          </div>
+
+          <nav className={style.headerLinks}>
+            <ul ref={linksContainerRef}>
+              <li>
+                <Link to="/" onClick={handleLinkClick}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/hotel" onClick={handleLinkClick}>
+                  Hotel
+                </Link>
+              </li>
+              <li>
+                <Link to="/acomodacoes" onClick={handleLinkClick}>
+                  Acomodações
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div
+            className={style.headerHamburgue}
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Fechar Menu" : "Abrir Menu"}
+            aria-expanded={isMenuOpen}
+            role="button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
         </div>
-
-        <nav className={style.headerLinks}>
-          <ul ref={linksContainerRef}>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Hotel
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Acomodações
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Refeições
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Diversão
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Day Use e Eventos
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsMenuOpen(false)}>
-                Ranchos
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <div
-          className={style.headerHamburgue}
-          onClick={toggleMenu}
-          aria-label="Abrir Menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
